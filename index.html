@@ -1,81 +1,39 @@
-<!DOCTYPE html>
-<html lang="en" >
-
+<html>
+<title>speak.js: Text-to-Speech on the Web</title>
 <head>
-  <meta charset="UTF-8">
-  <title>Text to speech example</title>
-  
-  
-  
-  
-  
+  <script>
+    // This demo is licensed under the GNU GPL.
+  </script>
+  <script src="speakClient.js"></script>
 </head>
-
 <body>
+  <h1>speak.js</h1>
+  <h2>Text-To-Speech on the Web</h2>
+  <form onsubmit="speak(text.value, { amplitude: amplitude.value, wordgap: workdgap.value, pitch: pitch.value, speed: speed.value }); return false">
+    Text: <input type="text" name="text" size=50 value="Never gonna give, you, up.">
+    Amplitude: <input type="text" name="amplitude" size=5 value="100">
+    Pitch: <input type="text" name="pitch" size=5 value="50">
+    Speed: <input type="text" name="speed" size=5 value="175">
+    Word gap: <input type="text" name="workdgap" size=5 value="0">
+    <input type="submit" value="Go!">
+  </form>
+  <hr>
+  <p>
+    This demo is 100% clientside JavaScript. It uses <a href="http://espeak.sourceforge.net/">eSpeak</a>, an open source
+    speech synthesizer, which was compiled from C++ to JavaScript using <a href="http://emscripten.org">Emscripten</a>.
+    The project page and source code for this demo can be found <a href="https://github.com/kripken/speak.js">here</a>.
+  </p>
 
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.95.1/css/materialize.min.css">
+  <p>
+    Browser requirements:
+    <ul>
+      <li><b>Typed arrays</b>. The eSpeak code is not portable to the extent that would be necessary to avoid using typed arrays.
+          (It should however be possible to rewrite small bits of eSpeak to fix that.)
+          Typed arrays are present in Firefox and Chrome, and hopefully by the time you read this in IE, Safari and Opera.</li>
+    </ul>
+  </p>
 
-<div class="container">
-  <div class="row">
-    <nav>
-      <div class="nav-wrapper">
-        <div class="col s12">
-          <a href="#" class="brand-logo">Text to speech example</a>
-        </div>
-      </div>
-    </nav>
-  </div>
-  <form class="col s8 offset-s2">
-    <div class="row">
-      <label>Choose voice</label>
-      <select id="voices"></select>
-    </div>
-    <div class="row">
-      <div class="col s6">
-        <label>Rate</label>
-        <p class="range-field">
-          <input type="range" id="rate" min="1" max="100" value="10" />
-        </p>
-      </div>
-      <div class="col s6">
-        <label>Pitch</label>
-        <p class="range-field">
-          <input type="range" id="pitch" min="0" max="2" value="1" />
-        </p>
-      </div>
-      <div class="col s12">
-        <p>N.B. Rate and Pitch only work with native voice.</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <textarea id="message" class="materialize-textarea"></textarea>
-        <label>Write message</label>
-      </div>
-    </div>
-    <a href="#" id="speak" class="waves-effect waves-light btn">Speak</a>
-  </form>  
-</div>
-
-<div id="modal1" class="modal">
-  <h4>Speech Synthesis not supported</h4>
-  <p>Your browser does not support speech synthesis.</p>
-  <p>We recommend you use Google Chrome.</p>
-  <div class="action-bar">
-    <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">Close</a>
-  </div>
-</div>
-
-<script src="jquery-3.3.1.js"></script>
-<script src="materialize.min.js"></script>
-  
-  
-
-    <script  src="js/index.js"></script>
-
-
-
-
+  <div id="audio"></div>
 </body>
-
 </html>
+
